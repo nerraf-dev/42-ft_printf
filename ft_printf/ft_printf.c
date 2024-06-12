@@ -6,12 +6,13 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/06/07 21:07:37 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/06/12 13:41:25 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "./libft/libft.h"
+#include <stdio.h>
 /*
 
 Initialize a counter to keep track of the number of characters printed.
@@ -57,17 +58,28 @@ int	ft_printf(const char *format, ...)
 			i++;
 			if (format[i] == '%')  // Add this case to handle '%%'
 			{
-				char p = '%';
-				write(1, &p, 1);
+				ft_putchar_fd('%', 1);
 				print_counter++;
 				i++;
 			}
 			else if (format[i] == 'c')
 			{
-				char c = va_arg(args, int);
-				write(1, &c, 1);
+				ft_putchar_fd(va_arg(args, int), 1);
 				print_counter++;
 				i++;
+			}
+			else if (format[i] == 's')
+			{
+				int len;
+
+				len = ft_strlen(va_arg(args, char *));
+				ft_putstr_fd(va_arg(args, char *), 1);
+				print_counter = print_counter + len;
+				i++;
+			}
+			else if (format[i] == 'i')
+			{
+				
 			}
 			// Add more cases for other format specifiers
 		}
@@ -78,7 +90,12 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	// ft_printf("Hello, %s!\n", "world");
-	ft_printf("My char: %c", 'Z');
+	ft_printf("ft: %%age test");
+	printf("%%age test");
+	ft_printf("ft: Favourite letter: %c", 'c');
+	printf("Favourite letter: %c", 'c');
+	ft_printf("Hello, %s!", "world");
+	printf("Hello, %s!", "world");
+
 	return (0);
 }
