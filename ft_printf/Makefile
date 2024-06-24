@@ -6,55 +6,61 @@
 #    By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 18:34:39 by sfarren           #+#    #+#              #
-#    Updated: 2024/06/02 18:46:27 by sfarren          ###   ########.fr        #
+#    Updated: 2024/06/24 13:36:49 by sfarren          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# Project Name
 NAME = libftprintf.a
 
-CC = clang
-CCFLAGS = -Wall -Wextra -Werror
+# Compiler and Flags
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Darwin) # macOS
+    CC = gcc
+else
+    CC = clang # Default to clang for other systems, including 42's
+endif
 
-SRC =
+CFLAGS = -Wall -Wextra -Werror
 
+# Source and Object Files
+SRC = ft_printf.c ft_putnbr_base_fd.c ft_utoa.c
 OBJS = $(SRC:.c=.o)
 
-# BONUS_SRC =
+# libft Configuration
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
-# BONUS_OBJS = $(BONUS_SRC:.c=.o)
+# Include Directories
+INCLUDES = -I./ -I$(LIBFT_DIR)
 
-HEADERS = libftprintf.h
+.PHONY: all clean fclean re libft
 
-.PHONY: all
-all: $(NAME)
+# Default Rule
+all: libft $(NAME)
 
-# the ar rcs command creates or updates an index in the archive
-# r: replace the specified files in the archive
-# c: create the archive if it does not exist
-# s: write an index for the archive (instead of using ranlib)
+# Rule for Making libft
+libft:
+	$(MAKE) -C $(LIBFT_DIR)
+
+# Rule for Making the Project
 $(NAME): $(OBJS)
+	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJS)
 
-# %.o: %.c is a pattern rule that says how to build .o files from .c files
-# $< is the first prerequisite, which is the .c file
-# $@ is the target, which is the .o file
-%.o: %.c $(HEADERS)
-	$(CC) $(CCFLAGS) -c $< -o $@
+# Compiling Object Files
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# .PHONY: bonus
-# bonus: $(OBJS) $(BONUS_OBJS)
-# 	ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-
-.PHONY: clean
+# Clean Objects
 clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
 	rm -f $(OBJS)
-	rm -f $(BONUS_OBJS)
 
-.PHONY: fclean
+# Full Clean
 fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
 
-.PHONY: re
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+# Re-make
+re: fclean all
