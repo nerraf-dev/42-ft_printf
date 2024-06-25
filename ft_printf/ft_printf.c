@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/06/24 14:20:49 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/06/24 17:27:51 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			i++;
-		if (format[i] == '%')
+			if (format[i] == '%')
 			{
 				ft_putchar_fd('%', 1);
 				print_counter++;
@@ -73,7 +73,10 @@ int	ft_printf(const char *format, ...)
 			{
 				str = va_arg(args, char *);
 				if (!str)
-					return("(null)");
+					{
+						ft_putstr_fd("(null)", 1);
+						print_counter = 6;
+					}
 				else
 				{
 					len = ft_strlen(str);
