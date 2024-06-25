@@ -1,21 +1,34 @@
 #include "ft_printf.h"
 
-void	ft_putnbr_base_fd(int n, char *base, int fd)
-{
-	int	base_len;
+//TODO: Clean up comments and make notes!
+char	*ft_putnbr_base_fd(unsigned int n, char *base) {
+
+	int					base_len;
+	int					len;
+	unsigned int		num;
+	char				*str;
 
 	base_len = ft_strlen(base);
-	if (n < 0)
+	len = 1;
+	num = n;
+
+	// Calculate the length of the resulting string
+	while (num >= (unsigned int)base_len)
 	{
-		ft_putchar_fd('-', fd);
-		if (n / base_len)
-			ft_putnbr_base_fd(n / -base_len, base, fd);
-		ft_putchar_fd(base[-(n % base_len)], fd);
+		num /= base_len;
+		len++;
 	}
-	else
+
+	// Problems when allocating and freeing space!
+	str = malloc(len + 1); // Allocate space for "0" and null terminator
+	if (!str)
+		return (NULL);
+	str[len] = '\0'; // Null terminate the string
+	while (len > 0)
 	{
-		if (n / base_len)
-			ft_putnbr_base_fd(n / base_len, base, fd);
-		ft_putchar_fd(base[n % base_len], fd);
+		len--;
+		str[len] = base[n % base_len];
+		n /= base_len;
 	}
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/06/24 17:27:51 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:34:39 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ int	ft_printf(const char *format, ...)
 	int				n;
 	char			*str;
 	unsigned int	m;
+	char 			*unsigned_str;
 
 	print_counter = 0;
 	va_start(args, format);
 	i = 0;
-	while (format[i])
+	while (format[i] != '\0')
 	{
 		if (format[i] != '%')
 		{
@@ -75,15 +76,15 @@ int	ft_printf(const char *format, ...)
 				if (!str)
 					{
 						ft_putstr_fd("(null)", 1);
-						print_counter = 6;
+						print_counter += 6;
 					}
 				else
 				{
 					len = ft_strlen(str);
 					ft_putstr_fd(str, 1);
-					print_counter = print_counter + len;
-					i++;
+					print_counter += len;
 				}
+				i++;
 			}
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
@@ -96,7 +97,7 @@ int	ft_printf(const char *format, ...)
 			else if (format[i] == 'u')
 			{
 				m = va_arg(args, unsigned int);
-				char *unsigned_str = ft_utoa(m);
+				unsigned_str = ft_utoa(m);
 				if (unsigned_str)
 				{
 					ft_putstr_fd(unsigned_str, 1);
@@ -108,25 +109,29 @@ int	ft_printf(const char *format, ...)
 			else if (format[i] == 'x')
 			{
 				m = va_arg(args, unsigned int);
-				len = int_length(m);
-				ft_putnbr_base_fd(m, "0123456789abcdef", 1);
-				print_counter = print_counter + len;
+				unsigned_str = ft_putnbr_base_fd(m, "0123456789abcdef");
+				print_counter += ft_strlen(unsigned_str);
+				ft_putstr_fd(unsigned_str, 1);
+				free(unsigned_str);
 				i++;
 			}
 			else if (format[i] == 'X')
 			{
 				m = va_arg(args, unsigned int);
-				len = int_length(m);
-				ft_putnbr_base_fd(m, "0123456789ABCDEF", 1);
-				print_counter = print_counter + len;
+				unsigned_str = ft_putnbr_base_fd(m, "0123456789ABCDEF");
+				print_counter += ft_strlen(unsigned_str);
+				ft_putstr_fd(unsigned_str, 1);
+				free(unsigned_str);
 				i++;
 			}
 			else if (format[i] == 'p')
 			{
 				m = va_arg(args, unsigned int);
 				ft_putstr_fd("0x", 1);
-				ft_putnbr_base_fd(m, "0123456789abcdef", 1);
-				print_counter = print_counter + 2 + int_length(m);
+				unsigned_str = ft_putnbr_base_fd(m, "0123456789abcdef");
+				print_counter = print_counter + 2 + ft_strlen(unsigned_str);
+				ft_putstr_fd(unsigned_str, 1);
+				free(unsigned_str);
 				i++;
 			}
 			else

@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:20:31 by sfarren           #+#    #+#             */
-/*   Updated: 2024/06/24 13:28:36 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:24:29 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "./libft/libft.h"
 
 int		ft_printf(const char *str, ...);
-void	ft_putnbr_base_fd(int n, char *base, int fd);
+char	*ft_putnbr_base_fd(unsigned int n, char *base);
 char	*ft_utoa(unsigned int n);
 
 #endif
