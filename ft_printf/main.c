@@ -3,7 +3,7 @@
 
 int	main(void)
 {
-	int i;
+	int i, j;
 
 	i = ft_printf("%s", (char *)NULL);
 	printf("%d\n", i);
@@ -34,5 +34,25 @@ int	main(void)
 	printf("%d\n", i);
 	ft_printf("Hex in: %x\n", 0xabcdef);
 	printf("Hex in: %x\n", 0xabcdef);
+
+	ft_printf("Hello\nWorld!\n");
+	printf("Hello\nWorld!\n");
+
+	i = ft_printf("\a\b\f\n\r\t\v\\\'\n");
+	j = printf("\a\b\f\n\r\t\v\\\'\n");
+	ft_printf("\a\b\f\n\r\t\v\\\'\n");
+	printf("\a\b\f\n\r\t\v\\\'\n");
+	printf(">>: %d %d", i, j);
+
 	return (0);
 }
+// \a      Write a <bell> character.
+//            \b      Write a <backspace> character.
+//            \f      Write a <form-feed> character.
+//            \n      Write a <new-line> character.
+//            \r      Write a <carriage return> character.
+//            \t      Write a <tab> character.
+//            \v      Write a <vertical tab> character.
+//            \´      Write a <single quote> character.
+//            \\      Write a backslash character.
+//            \num    Write a byte whose value is the 1-, 2-, or 3-digit octal number num.

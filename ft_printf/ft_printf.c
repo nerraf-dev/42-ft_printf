@@ -6,12 +6,11 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/06/25 12:34:39 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/06/28 13:04:14 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "./libft/libft.h"
 
 static int	int_length(int n)
 {
@@ -33,6 +32,27 @@ static int	int_length(int n)
 	return (count);
 }
 
+int	ft_printchr_fd(char c, int fd)
+{
+	if (write(fd, &c, 1) == -1)
+		return (-1);
+	return (1);
+}
+
+int	ft_printstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (write(fd, &s[i], 1) == -1)
+			return (-1);
+		i++;
+	}
+	return (i);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list			args;
@@ -43,6 +63,7 @@ int	ft_printf(const char *format, ...)
 	char			*str;
 	unsigned int	m;
 	char 			*unsigned_str;
+	void			*ptr;
 
 	print_counter = 0;
 	va_start(args, format);
@@ -51,7 +72,8 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			ft_putchar_fd(format[i], 1);
+			if (ft_printchr_fd(format[i], 1) == -1)
+				return (-1);
 			print_counter++;
 			i++;
 		}
@@ -60,13 +82,13 @@ int	ft_printf(const char *format, ...)
 			i++;
 			if (format[i] == '%')
 			{
-				ft_putchar_fd('%', 1);
+				ft_printchr_fd('%', 1);
 				print_counter++;
 				i++;
 			}
 			else if (format[i] == 'c')
 			{
-				ft_putchar_fd(va_arg(args, int), 1);
+				ft_printchr_fd(va_arg(args, int), 1);
 				print_counter++;
 				i++;
 			}
@@ -75,13 +97,13 @@ int	ft_printf(const char *format, ...)
 				str = va_arg(args, char *);
 				if (!str)
 					{
-						ft_putstr_fd("(null)", 1);
+						ft_printstr_fd("(null)", 1);
 						print_counter += 6;
 					}
 				else
 				{
 					len = ft_strlen(str);
-					ft_putstr_fd(str, 1);
+					ft_printstr_fd(str, 1);
 					print_counter += len;
 				}
 				i++;
@@ -100,7 +122,8 @@ int	ft_printf(const char *format, ...)
 				unsigned_str = ft_utoa(m);
 				if (unsigned_str)
 				{
-					ft_putstr_fd(unsigned_str, 1);
+					if (ft_printstr_fd(unsigned_str, 1) == -1)
+						return (-1);
 					print_counter += ft_strlen(unsigned_str);
 					free(unsigned_str);
 				}
@@ -111,7 +134,7 @@ int	ft_printf(const char *format, ...)
 				m = va_arg(args, unsigned int);
 				unsigned_str = ft_putnbr_base_fd(m, "0123456789abcdef");
 				print_counter += ft_strlen(unsigned_str);
-				ft_putstr_fd(unsigned_str, 1);
+				ft_printstr_fd(unsigned_str, 1);
 				free(unsigned_str);
 				i++;
 			}
@@ -120,17 +143,21 @@ int	ft_printf(const char *format, ...)
 				m = va_arg(args, unsigned int);
 				unsigned_str = ft_putnbr_base_fd(m, "0123456789ABCDEF");
 				print_counter += ft_strlen(unsigned_str);
-				ft_putstr_fd(unsigned_str, 1);
+				ft_printstr_fd(unsigned_str, 1);
 				free(unsigned_str);
 				i++;
 			}
 			else if (format[i] == 'p')
 			{
-				m = va_arg(args, unsigned int);
-				ft_putstr_fd("0x", 1);
-				unsigned_str = ft_putnbr_base_fd(m, "0123456789abcdef");
-				print_counter = print_counter + 2 + ft_strlen(unsigned_str);
-				ft_putstr_fd(unsigned_str, 1);
+				ptr = va_arg(args, void*);
+				if (ft_printstr_fd("0x", 1) == -1)
+					return (-1);
+				print_counter += 2;
+				unsigned_str = ft_putnbr_base_fd((unsigned long)ptr,
+						"0123456789abcdef");
+				print_counter += ft_strlen(unsigned_str);
+				if (ft_printstr_fd(unsigned_str, 1) == -1)
+						return (-1);
 				free(unsigned_str);
 				i++;
 			}

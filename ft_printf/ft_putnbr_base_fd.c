@@ -1,19 +1,20 @@
 #include "ft_printf.h"
 
 //TODO: Clean up comments and make notes!
-char	*ft_putnbr_base_fd(unsigned int n, char *base) {
+char	*ft_putnbr_base_fd(unsigned long n, char *base) {
 
 	int					base_len;
 	int					len;
-	unsigned int		num;
+	unsigned long		num;
 	char				*str;
 
 	base_len = ft_strlen(base);
 	len = 1;
 	num = n;
-
+	if (base_len < 2)
+		return (NULL);
 	// Calculate the length of the resulting string
-	while (num >= (unsigned int)base_len)
+	while (num >= (unsigned long)base_len)
 	{
 		num /= base_len;
 		len++;
