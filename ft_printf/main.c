@@ -44,6 +44,17 @@ int	main(void)
 	printf("\a\b\f\n\r\t\v\\\'\n");
 	printf(">>: %d %d", i, j);
 
+	printf("\n\n\n");
+
+	i = 42;
+	ft_printf("P: %p\n", &i);
+	printf("P: %p\n", &i);
+
+	char *str = "";
+	i = 42;
+	ft_printf("P: %p\n", &str);
+	printf("P: %p\n", &str);
+
 	return (0);
 }
 // \a      Write a <bell> character.
