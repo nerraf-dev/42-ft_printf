@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:20:31 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/02 14:37:41 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:52:06 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "./libft/libft.h"
 
 int		ft_printf(const char *str, ...);
-char	*ft_putnbr_base_fd(unsigned long n, char *base);
+char	*ft_putnbr_base(unsigned long n, char *base);
 char	*ft_utoa(unsigned int n);
 char	*ft_strchr(const char *s, int c);
 int		ft_printchr_fd(char c, int fd);

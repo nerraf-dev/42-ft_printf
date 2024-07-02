@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/02 14:19:39 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:13:00 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,19 @@ int	ft_printf(const char *format, ...)
 			else if (format[i] == 'x' || format[i] == 'X')
 			{
 				if (format[i] == 'x')
-					unsigned_str = ft_putnbr_base_fd(va_arg(args, unsigned int),
+					unsigned_str = ft_putnbr_base(va_arg(args, unsigned int),
 							"0123456789abcdef");
 				else
-					unsigned_str = ft_putnbr_base_fd(va_arg(args, unsigned int),
+					unsigned_str = ft_putnbr_base(va_arg(args, unsigned int),
 							"0123456789ABCDEF");
+				if (!unsigned_str)
+					return (-1);
 				print_counter += ft_strlen(unsigned_str);
 				if (ft_printstr_fd(unsigned_str, 1) == -1)
-						return (-1);
+				{
+					free(unsigned_str);
+					return (-1);
+				}
 				free(unsigned_str);
 				i++;
 			}
@@ -135,7 +140,7 @@ int	ft_printf(const char *format, ...)
 				if (ft_printstr_fd("0x", 1) == -1)
 					return (-1);
 				print_counter += 2;
-				unsigned_str = ft_putnbr_base_fd((unsigned long)ptr,
+				unsigned_str = ft_putnbr_base((unsigned long)ptr,
 						"0123456789abcdef");
 				if (!unsigned_str)
 					return (-1);

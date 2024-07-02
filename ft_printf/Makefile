@@ -6,7 +6,7 @@
 #    By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 18:34:39 by sfarren           #+#    #+#              #
-#    Updated: 2024/07/02 14:34:44 by sfarren          ###   ########.fr        #
+#    Updated: 2024/07/02 14:47:49 by sfarren          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CFLAGS = -Wall -Wextra -Werror
 # Source and Object Files
 SRC = 	ft_printchr_fd.c \
 		ft_printnbr_fd.c \
-		ft_putnbr_base_fd.c \
+		ft_putnbr_base.c \
 		ft_printf.c \
 		ft_printstr_fd.c \
 		ft_utoa.c
