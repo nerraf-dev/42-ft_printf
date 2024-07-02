@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_printstr_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 13:27:04 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/02 14:20:31 by sfarren          ###   ########.fr       */
+/*   Created: 2024/07/01 16:13:05 by sfarren           #+#    #+#             */
+/*   Updated: 2024/07/02 14:37:51 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//TODO: NOTES and clean up comments
 
-char	*ft_utoa(unsigned int n)
+int	ft_printstr_fd(char *s, int fd)
 {
-	char			*str;
-	unsigned int	num;
-	int				length;
+	int	i;
 
-	num = n;
-	length = 0;
-	if (num == 0)
-		length = 1;
-	while (num)
+	i = 0;
+	while (s[i] != '\0')
 	{
-		length++;
-		num /= 10;
+		if (write(fd, &s[i], 1) == -1)
+			return (-1);
+		i++;
 	}
-	str = (char *)malloc(sizeof(char) * (length + 1));
-	if (!(str))
-		return (NULL);
-	str[length] = '\0';
-	while (length--)
-	{
-		str[length] = n % 10 + '0';
-		n /= 10;
-	}
-	return (str);
+	return (i);
 }

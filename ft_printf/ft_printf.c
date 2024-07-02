@@ -6,12 +6,11 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/06/30 14:57:23 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:19:39 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "utils.c"
 
 static int	int_length(int n)
 {
@@ -32,8 +31,6 @@ static int	int_length(int n)
 	}
 	return (count);
 }
-
-
 
 int	ft_printf(const char *format, ...)
 {
@@ -126,24 +123,12 @@ int	ft_printf(const char *format, ...)
 				else
 					unsigned_str = ft_putnbr_base_fd(va_arg(args, unsigned int),
 							"0123456789ABCDEF");
-				// m = va_arg(args, unsigned int);
-				// unsigned_str = ft_putnbr_base_fd(m, "0123456789abcdef");
 				print_counter += ft_strlen(unsigned_str);
 				if (ft_printstr_fd(unsigned_str, 1) == -1)
 						return (-1);
 				free(unsigned_str);
 				i++;
 			}
-			// else if (format[i] == 'X')
-			// {
-			// 	m = va_arg(args, unsigned int);
-			// 	unsigned_str = ft_putnbr_base_fd(m, "0123456789ABCDEF");
-			// 	print_counter += ft_strlen(unsigned_str);
-			// 	if (ft_printstr_fd(unsigned_str, 1) == -1)
-			// 			return (-1);
-			// 	free(unsigned_str);
-			// 	i++;
-			// }
 			else if (format[i] == 'p')
 			{
 				ptr = va_arg(args, void*);
