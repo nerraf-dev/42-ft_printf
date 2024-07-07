@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/02 15:13:00 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/07 15:54:22 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,36 @@ static int	int_length(int n)
 	return (count);
 }
 
+int	handle_char(va_list args, int *print_counter)
+{
+	if (ft_printchr_fd(va_arg(args, int), 1) == -1)
+		return (-1);
+	(*print_counter)++;
+	return (0);
+}
+
+int	handle_string(va_list args, int *print_counter)
+{
+	char	*str;
+	int		len;
+
+	str = va_arg(args, char *);
+	if (!str)
+	{
+		if (ft_printstr_fd("(null)", 1) == -1)
+			return (-1);
+		*print_counter += 6;
+	}
+	else
+	{
+		len = ft_strlen(str);
+		if (ft_printstr_fd(str, 1) == -1)
+			return (-1);
+		*print_counter += len;
+	}
+	return (0);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list			args;
@@ -40,7 +70,8 @@ int	ft_printf(const char *format, ...)
 	int				len;
 	int				n;
 	char			*str;
-	unsigned int	m;
+	int				z;
+	// unsigned int	m;
 	char 			*unsigned_str;
 	void			*ptr;
 
@@ -49,6 +80,22 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	while (format[i] != '\0')
 	{
+		// Check format[i]
+		// If format[i] is not a %, print it
+		// If format[i] is a %, check the next character
+			// If the next character is a %, print a % and increment i
+			// If the next character is a c, print a character and increment i
+			// If the next character is a s, print a string and increment i
+			// If the next character is a d or i, print an integer and increment i
+			// If the next character is a u, print an unsigned integer and increment i
+			// If the next character is a x or X, print a hexadecimal number and increment i
+			// If the next character is a p, print a pointer and increment i
+		// Increment i
+
+		// if (format[i] == '%')
+		// {
+		// 	print_counter = print_counter + format_check(format, i);
+		// }
 		if (format[i] != '%')
 		{
 			if (ft_printchr_fd(format[i], 1) == -1)
@@ -59,6 +106,7 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			i++;
+			format_check(args, format[i]);
 			if (format[i] == '%')
 			{
 				if (ft_printstr_fd("%", 1) == -1)
@@ -102,8 +150,8 @@ int	ft_printf(const char *format, ...)
 			}
 			else if (format[i] == 'u')
 			{
-				m = va_arg(args, unsigned int);
-				unsigned_str = ft_utoa(m);
+				// m = va_arg(args, unsigned int);
+				unsigned_str = ft_utoa(va_arg(args, unsigned int));
 				if (!unsigned_str)
 					return (-1);
 				if (ft_printstr_fd(unsigned_str, 1) == -1)
