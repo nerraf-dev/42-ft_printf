@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/07 15:54:22 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/08 08:37:10 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	int_length(int n)
 
 int	handle_char(va_list args, int *print_counter)
 {
-	if (ft_printchr_fd(va_arg(args, int), 1) == -1)
+	if (ft_printchr(va_arg(args, int)) == -1)
 		return (-1);
 	(*print_counter)++;
 	return (0);
@@ -70,7 +70,7 @@ int	ft_printf(const char *format, ...)
 	int				len;
 	int				n;
 	char			*str;
-	int				z;
+	// int				z;
 	// unsigned int	m;
 	char 			*unsigned_str;
 	void			*ptr;
@@ -98,7 +98,7 @@ int	ft_printf(const char *format, ...)
 		// }
 		if (format[i] != '%')
 		{
-			if (ft_printchr_fd(format[i], 1) == -1)
+			if (ft_printchr(format[i]) == -1)
 				return (-1);
 			print_counter++;
 			i++;
@@ -106,7 +106,6 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			i++;
-			format_check(args, format[i]);
 			if (format[i] == '%')
 			{
 				if (ft_printstr_fd("%", 1) == -1)
@@ -116,7 +115,7 @@ int	ft_printf(const char *format, ...)
 			}
 			else if (format[i] == 'c')
 			{
-				if (ft_printchr_fd(va_arg(args, int), 1) == -1)
+				if (ft_printchr(va_arg(args, int)) == -1)
 					return (-1);
 				print_counter++;
 				i++;

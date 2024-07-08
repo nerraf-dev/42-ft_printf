@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:13:23 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/07 15:58:54 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/08 08:20:51 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	format_check(va_list args, const char format)
 	print_counter = 0;
 	count = 0;
 	if (format == 'c')
-		count = ft_printchr_fd(va_arg(args, int), 1);
+		count = ft_printchr(va_arg(args, int));
 	// else if (format == 's')
 	// 	count += ft_printstr(va_arg(args, char *));
 	// else if (format == 'p')
@@ -31,8 +31,8 @@ int	format_check(va_list args, const char format)
 	// 	count += ft_print_unsigned(va_arg(args, unsigned int));
 	// else if (format == 'x' || format == 'X')
 	// 	count += ft_print_hex(va_arg(args, unsigned int), format);
-	// else if (format == '%')
-	// 	count += ft_printpercent();
+	else if (format == '%')
+		count += ft_printchr('%');
 	if (count == -1)
 		return (-1);
 	else
