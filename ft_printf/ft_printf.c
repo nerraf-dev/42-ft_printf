@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/08 08:37:10 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/08 12:09:52 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,6 @@ static int	int_length(int n)
 		count++;
 	}
 	return (count);
-}
-
-int	handle_char(va_list args, int *print_counter)
-{
-	if (ft_printchr(va_arg(args, int)) == -1)
-		return (-1);
-	(*print_counter)++;
-	return (0);
-}
-
-int	handle_string(va_list args, int *print_counter)
-{
-	char	*str;
-	int		len;
-
-	str = va_arg(args, char *);
-	if (!str)
-	{
-		if (ft_printstr_fd("(null)", 1) == -1)
-			return (-1);
-		*print_counter += 6;
-	}
-	else
-	{
-		len = ft_strlen(str);
-		if (ft_printstr_fd(str, 1) == -1)
-			return (-1);
-		*print_counter += len;
-	}
-	return (0);
 }
 
 int	ft_printf(const char *format, ...)
