@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:11:25 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/08 08:37:45 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/11 14:41:47 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_printnbr_fd(int n, int fd)
 
 	if (n == -2147483648)
 	{
-		if (ft_printstr_fd("-2147483648", fd) == -1)
+		if (ft_printstr("-2147483648") == -1)
 			return (-1);
 		return (0);
 	}

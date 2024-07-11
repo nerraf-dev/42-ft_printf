@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/08 12:09:52 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:12:43 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_printf(const char *format, ...)
 			i++;
 			if (format[i] == '%')
 			{
-				if (ft_printstr_fd("%", 1) == -1)
+				if (ft_printstr("%") == -1)
 					return (-1);
 				print_counter++;
 				i++;
@@ -95,14 +95,14 @@ int	ft_printf(const char *format, ...)
 				str = va_arg(args, char *);
 				if (!str)
 					{
-						if (ft_printstr_fd("(null)", 1) == -1)
+						if (ft_printstr("(null)") == -1)
 							return (-1);
 						print_counter += 6;
 					}
 				else
 				{
 					len = ft_strlen(str);
-					if (ft_printstr_fd(str, 1) == -1)
+					if (ft_printstr(str) == -1)
 						return (-1);
 					print_counter += len;
 				}
@@ -123,7 +123,7 @@ int	ft_printf(const char *format, ...)
 				unsigned_str = ft_utoa(va_arg(args, unsigned int));
 				if (!unsigned_str)
 					return (-1);
-				if (ft_printstr_fd(unsigned_str, 1) == -1)
+				if (ft_printstr(unsigned_str) == -1)
 				{
 					free(unsigned_str);
 					return (-1);
@@ -143,7 +143,7 @@ int	ft_printf(const char *format, ...)
 				if (!unsigned_str)
 					return (-1);
 				print_counter += ft_strlen(unsigned_str);
-				if (ft_printstr_fd(unsigned_str, 1) == -1)
+				if (ft_printstr(unsigned_str) == -1)
 				{
 					free(unsigned_str);
 					return (-1);
@@ -154,7 +154,7 @@ int	ft_printf(const char *format, ...)
 			else if (format[i] == 'p')
 			{
 				ptr = va_arg(args, void*);
-				if (ft_printstr_fd("0x", 1) == -1)
+				if (ft_printstr("0x") == -1)
 					return (-1);
 				print_counter += 2;
 				unsigned_str = ft_putnbr_base((unsigned long)ptr,
@@ -162,7 +162,7 @@ int	ft_printf(const char *format, ...)
 				if (!unsigned_str)
 					return (-1);
 				print_counter += ft_strlen(unsigned_str);
-				if (ft_printstr_fd(unsigned_str, 1) == -1)
+				if (ft_printstr(unsigned_str) == -1)
 						return (-1);
 				free(unsigned_str);
 				i++;

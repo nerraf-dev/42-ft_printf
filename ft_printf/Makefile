@@ -6,7 +6,7 @@
 #    By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 18:34:39 by sfarren           #+#    #+#              #
-#    Updated: 2024/07/08 08:37:54 by sfarren          ###   ########.fr        #
+#    Updated: 2024/07/11 14:42:20 by sfarren          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = 	ft_printchr.c \
 		ft_printnbr_fd.c \
 		ft_putnbr_base.c \
 		ft_printf.c \
-		ft_printstr_fd.c \
+		ft_printstr.c \
 		ft_utoa.c \
 		# utils.c
 
