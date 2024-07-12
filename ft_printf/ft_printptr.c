@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnbr.c                                      :+:      :+:    :+:   */
+/*   ft_printptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 16:11:25 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/12 16:43:47 by sfarren          ###   ########.fr       */
+/*   Created: 2024/07/08 15:25:53 by sfarren           #+#    #+#             */
+/*   Updated: 2024/07/12 17:46:18 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printnbr(int n)
+int	ft_printptr(void *ptr)
 {
-	char	c;
-	int		count;
+	int	res;
+	int	print_counter;
 
-	count = 0;
-	if (n == -2147483648)
-	{
-		if (ft_printstr("-2147483648") == -1)
-			return (-1);
-		return (11);
-	}
-	if (n < 0)
-	{
-		if (ft_printchr('-') == -1)
-			return (-1);
-		n *= -1;
-		count++;
-	}
-	if (n >= 10)
-		if (ft_printnbr(n / 10) == -1)
-			return (-1);
-	c = (n % 10) + '0';
-	if (ft_printchr(c) == -1)
+	print_counter = 0;
+	if (ft_printstr("0x") == -1)
 		return (-1);
-	count++;
-	return (count);
+	print_counter += 2;
+	res = ft_printhex((unsigned long)ptr, 'x');
+	if (res == -1)
+		return (-1);
+	return (print_counter + res);
 }

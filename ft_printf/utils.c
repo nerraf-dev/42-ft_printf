@@ -6,36 +6,61 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:13:23 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/08 08:20:51 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/12 18:11:48 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	format_check(va_list args, const char format)
+static int	handle_char(char c)
 {
-	int	print_counter;
-	int count;
-
-	print_counter = 0;
-	count = 0;
-	if (format == 'c')
-		count = ft_printchr(va_arg(args, int));
-	// else if (format == 's')
-	// 	count += ft_printstr(va_arg(args, char *));
-	// else if (format == 'p')
-	// 	count += ft_print_ptr(va_arg(args, unsigned long long));
-	// else if (format == 'd' || format == 'i')
-	// 	count += ft_printnbr(va_arg(args, int));
-	// else if (format == 'u')
-	// 	count += ft_print_unsigned(va_arg(args, unsigned int));
-	// else if (format == 'x' || format == 'X')
-	// 	count += ft_print_hex(va_arg(args, unsigned int), format);
-	else if (format == '%')
-		count += ft_printchr('%');
-	if (count == -1)
+	if (write(1, &c, 1) == -1)
 		return (-1);
-	else
-		print_counter += count;
-	return (print_counter);
+	return (1);
+}
+
+static int	format_handler(const char c, va_list args)
+{
+	int	count;
+
+	count = 0;
+	if (c == 'd' || c == 'i')
+		count = ft_printnbr(va_arg(args, int));
+	else if (c == 's')
+		count = ft_printstr(va_arg(args, char *));
+	else if (c == 'c')
+		count = ft_printchr(va_arg(args, int));
+	else if (c == 'u')
+		count = ft_printstr(ft_utoa(va_arg(args, unsigned int)));
+	else if (c == 'p')
+		count = ft_printptr(va_arg(args, void *));
+	return (count);
+}
+
+int	parse_fstring(const char *str, va_list args)
+{
+	int	i;
+	int	count;
+	int	print_count;
+
+	i = 0;
+	print_count = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != '%')
+		{
+			count = handle_char(str[i]);
+			i++;
+		}
+		else
+		{
+			count = format_handler(str[i], args);
+			i += 2;
+		}
+		if (count == -1)
+			return (-1);
+		else
+			print_count += count;
+	}
+	return (print_count);
 }
