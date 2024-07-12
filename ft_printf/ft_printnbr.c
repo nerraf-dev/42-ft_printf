@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnbr_fd.c                                   :+:      :+:    :+:   */
+/*   ft_printnbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:11:25 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/11 14:41:47 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:15:14 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printnbr_fd(int n, int fd)
+int	ft_printnbr(int n)
 {
 	char	c;
 
@@ -29,7 +29,7 @@ int	ft_printnbr_fd(int n, int fd)
 		n *= -1;
 	}
 	if (n >= 10)
-		if (ft_printnbr_fd(n / 10, fd) == -1)
+		if (ft_printnbr(n / 10) == -1)
 			return (-1);
 	c = (n % 10) + '0';
 	if (ft_printchr(c) == -1)
