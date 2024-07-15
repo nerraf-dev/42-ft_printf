@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr.c                                      :+:      :+:    :+:   */
+/*   ft_printu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 14:42:08 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/13 12:18:19 by sfarren          ###   ########.fr       */
+/*   Created: 2024/07/15 08:32:26 by sfarren           #+#    #+#             */
+/*   Updated: 2024/07/15 08:40:26 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printstr(char *s)
+int	ft_printu(unsigned int n)
 {
-	int	i;
+	char	*str;
+	int		count;
 
-	i = 0;
-	if (s == NULL)
-		s = "(null)";
-	while (s[i] != '\0')
-	{
-		if (write(1, &s[i], 1) == -1)
-			return (-1);
-		i++;
-	}
-	return (i);
+	str = ft_utoa(n);
+	if (!str)
+		return (-1);
+	count = ft_printstr(str);
+	free(str);
+	return (count);
 }

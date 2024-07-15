@@ -6,24 +6,26 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:33:24 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/02 14:52:00 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/15 10:30:20 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_nbrlen(unsigned long n, int base_len)
-{
-	int	len;
+// static int	ft_nbrlen(unsigned long n, int base_len)
+// {
+// 	int	len;
 
-	len = 1;
-	while (n >= (unsigned long)base_len)
-	{
-		n /= base_len;
-		len++;
-	}
-	return (len);
-}
+// 	len = 1;
+// 	if (n == 0)
+// 		return (1);
+// 	while (n >= (unsigned long)base_len)
+// 	{
+// 		n /= base_len;
+// 		len++;
+// 	}
+// 	return (len);
+// }
 
 // Validates if the base string is valid for conversion.
 static int	is_valid_base(char *base)
@@ -51,24 +53,23 @@ static int	is_valid_base(char *base)
 }
 
 // Converts a number to a string based on the specified base.
-char	*ft_putnbr_base(unsigned long n, char *base)
+int	ft_putnbr_base(unsigned long long n, char *base)
 {
 	int		base_len;
-	int		len;
-	char	*str;
+	int		counter;
+	char	c;
 
 	if (!is_valid_base(base))
-		return (NULL);
-	base_len = ft_strlen(base);
-	len = ft_nbrlen(n, base_len);
-	str = (char *)malloc(len + 1);
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	while (len--)
-	{
-		str[len] = base[n % base_len];
-		n /= base_len;
-	}
-	return (str);
+		return (-1);
+
+	base_len = 0;
+	while (base[base_len])
+		base_len++;
+	counter = 0;
+	if (n >= (unsigned long long)base_len)
+		counter += ft_putnbr_base(n / base_len, base);
+	c = base[n % base_len];
+	if (ft_printchr(c) == -1)
+		return (-1);
+	return (counter + 1);
 }
