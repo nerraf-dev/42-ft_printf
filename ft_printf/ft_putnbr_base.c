@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:33:24 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/15 10:30:20 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/15 13:37:59 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,18 @@ static int	is_valid_base(char *base)
 }
 
 // Converts a number to a string based on the specified base.
-int	ft_putnbr_base(unsigned long long n, char *base)
+int	ft_putnbr_base(unsigned int n, char *base)
 {
-	int		base_len;
-	int		counter;
-	char	c;
+	unsigned int		base_len;
+	int					counter;
+	char				c;
 
 	if (!is_valid_base(base))
 		return (-1);
 
-	base_len = 0;
-	while (base[base_len])
-		base_len++;
+	base_len = ft_strlen(base);
 	counter = 0;
-	if (n >= (unsigned long long)base_len)
+	if (n >= base_len)
 		counter += ft_putnbr_base(n / base_len, base);
 	c = base[n % base_len];
 	if (ft_printchr(c) == -1)

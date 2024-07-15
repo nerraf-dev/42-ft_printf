@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:13:23 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/15 12:11:28 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/15 15:49:22 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	format_handler(const char c, va_list args)
 {
-	int				count;
-	unsigned int 	num;
+	int		count;
+	int 	num;
 
 	count = 0;
 	if (c == 'd' || c == 'i')
@@ -28,8 +28,9 @@ static int	format_handler(const char c, va_list args)
 		count = ft_printchr('%');
 	else if (c == 'x' || c == 'X')
 	{
-		num = va_arg(args, unsigned int);
-		count = ft_printhex((unsigned long long)num, c);
+		num = va_arg(args, int);
+		printf("%u\n\n", num);
+		count = ft_printhex(num, c);
 	}
 	else if (c == 'u')
 		count = ft_printu(va_arg(args, unsigned int));
