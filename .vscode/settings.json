@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"vector": "c",
-		"format": "c"
+		"format": "c",
+		"ratio": "c"
 	}
 }

@@ -6,42 +6,45 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/12 18:12:14 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:35:58 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// static int	int_length(int n)
-// {
-// 	int	count;
 
-// 	count = 0;
-// 	if (n < 0)
-// 	{
-// 		count++;
-// 		n *= -1;
-// 	}
-// 	if (n == 0)
-// 		count = 1;
-// 	while (n != 0)
-// 	{
-// 		n /= 10;
-// 		count++;
-// 	}
-// 	return (count);
+// int	ft_printf(const char *format, ...)
+// {
+// 	va_list			args;
+// 	int				print_counter;
+
+// 	print_counter = 0;
+// 	va_start(args, format);
+// 	print_counter = parse_fstring(format, args);
+// 	va_end(args);
+// 	return (print_counter);
 // }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf(const char *str, ...)
 {
-	va_list			args;
-	int				print_counter;
+	int		i;
+	va_list	args;
+	int		counter;
 
-	print_counter = 0;
-	va_start(args, format);
-	print_counter = parse_fstring(format, args);
+	i = 0;
+	counter = 0;
+	va_start(args, str);
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			counter += format_handler(str[i + 1], args);
+			i++;
+		}
+		else
+			counter += ft_printchar(str[i]);
+		i++;
+	}
 	va_end(args);
-	return (print_counter);
+	return (counter);
 }
-
-
