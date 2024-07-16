@@ -6,7 +6,7 @@
 #    By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 18:34:39 by sfarren           #+#    #+#              #
-#    Updated: 2024/07/15 08:39:21 by sfarren          ###   ########.fr        #
+#    Updated: 2024/07/16 15:57:05 by sfarren          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ NAME = libftprintf.a
 # Compiler and Flags
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin) # macOS
-    CC = gcc
+	CC = gcc
 else
-    CC = clang # Default to clang for other systems, including 42's
+	CC = clang # Default to clang for other systems, including 42's
 endif
 
 CFLAGS = -Wall -Wextra -Werror

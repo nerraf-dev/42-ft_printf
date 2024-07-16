@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:13:23 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/15 15:49:22 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 15:00:47 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	format_handler(const char c, va_list args)
 	else if (c == 'x' || c == 'X')
 	{
 		num = va_arg(args, int);
-		printf("%u\n\n", num);
+		// printf("%u\n\n", num);
 		count = ft_printhex(num, c);
 	}
 	else if (c == 'u')

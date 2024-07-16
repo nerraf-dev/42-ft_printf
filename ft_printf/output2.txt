@@ -1,0 +1,1 @@
+Hex: be1475d0, Dec: -1105955568, Char: ð, String: 

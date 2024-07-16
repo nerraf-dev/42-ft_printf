@@ -1,0 +1,1 @@
+Hex: ff, Dec: 255, Char: A, String: Hello
