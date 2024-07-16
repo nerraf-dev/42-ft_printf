@@ -6,24 +6,22 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 14:42:08 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/13 12:18:19 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 17:10:28 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printstr(char *s)
+void	ft_printstr(char *s, int *count)
 {
 	int	i;
 
 	i = 0;
 	if (s == NULL)
 		s = "(null)";
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		if (write(1, &s[i], 1) == -1)
-			return (-1);
+		ft_printchr(s[i], &count);
 		i++;
 	}
-	return (i);
 }

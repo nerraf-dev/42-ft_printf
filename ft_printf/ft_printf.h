@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:20:31 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/16 16:37:13 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 17:15:39 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 int		ft_printf(const char *str, ...);
 int		ft_putnbr_base(unsigned int n, char *base);
 char	*ft_utoa(unsigned int n);
-int		ft_printchr(char c);
+void	ft_printchr(char c, int *count);
 int		ft_printnbr(int n);
-int		ft_printstr(char *s);
-int		ft_printptr(void *ptr);
+void	ft_printstr(char *s, int *count);
+void	ft_printptr(unsigned long long *ptr, int *count);
 int		ft_printhex(int n, char c);
 int		ft_printu(unsigned int n);
 // int		parse_fstring(const char *str, va_list args);

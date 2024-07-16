@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/16 16:35:58 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 17:01:34 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ int	ft_printf(const char *str, ...)
 {
 	int		i;
 	va_list	args;
-	int		counter;
+	int		print_counter;
 
 	i = 0;
-	counter = 0;
+	print_counter = 0;
 	va_start(args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			counter += format_handler(str[i + 1], args);
+			print_counter += format_handler(str[i + 1], args, &print_counter);
 			i++;
 		}
 		else
-			counter += ft_printchar(str[i]);
+			ft_printchar(str[i], &print_counter);
 		i++;
 	}
 	va_end(args);
-	return (counter);
+	return (print_counter);
 }

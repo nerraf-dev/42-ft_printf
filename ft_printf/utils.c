@@ -6,32 +6,30 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:13:23 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/16 16:37:35 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 17:12:06 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	format_handler(const char c, va_list args)
+static void	format_handler(const char c, va_list args, int *count)
 {
-	int		counter;
-
-	counter = 0;
 	if (c == 'd' || c == 'i')
-		counter += ft_printnbr(va_arg(args, int));
+		ft_printnbr(va_arg(args, int));
 	else if (c == 's')
-		counter += ft_printstr(va_arg(args, char *));
+		ft_printstr(va_arg(args, char *), &count);
 	else if (c == 'c')
-		counter += ft_printchr(va_arg(args, int));
+		ft_printchr(va_arg(args, int), &count);
 	else if (c == '%')
-		counter += ft_printchr('%');
+		ft_printchr('%', &count);
 	else if (c == 'x' || c == 'X')
-		counter += ft_printhex(va_arg(args, int), c);
+		ft_printhex(va_arg(args, int), c);
 	else if (c == 'u')
-		counter += ft_printu(va_arg(args, unsigned int));
+		ft_printu(va_arg(args, unsigned int));
 	else if (c == 'p')
-		counter += ft_printptr(va_arg(args, void *));
-	return (counter);
+		ft_printptr(va_arg(args, void *));
+	else
+		*count = -1;
 }
 
 // int	parse_fstring(const char *str, va_list args)

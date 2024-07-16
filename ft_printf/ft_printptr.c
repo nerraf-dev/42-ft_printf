@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:25:53 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/15 13:26:23 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 17:16:42 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,10 @@ static int	put_ptr(unsigned long long n)
 	return (counter + 1);
 }
 
-int	ft_printptr(void *ptr)
+	ft_printptr(unsigned long long *ptr, int *count)
 {
-	int	res;
-	int	print_counter;
+	ft_printstr("0x", &count);
 
-	res = 0;
-	// if (ptr && *((char *)ptr) == '\0')
-	//  	printf("\nEMPTY STRING POINTER \n");
-	if (ft_printstr("0x") == -1)
-		return (-1);
 	print_counter = 2;
 	res = put_ptr((unsigned long)ptr);
 	if (res == -1)
