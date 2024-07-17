@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:20:31 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/17 10:15:00 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/17 12:21:49 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@
 # include <unistd.h>
 # include <limits.h>
 # include "./libft/libft.h"
-//TODO: DELETE THIS and all refs to printf()
-# include <stdio.h>
 
 # define DECIMAL "0123456789"
 # define HEX_LOWER "0123456789abcdef"
 # define HEX_UPPER "0123456789ABCDEF"
+
+# ifdef __APPLE__
+#  define NULL_PTR_STR "0x0"
+# else
+#  define NULL_PTR_STR "(nil)"
+# endif
 
 int		ft_printf(const char *str, ...);
 void	ft_printnbr_base(long long n, char *base, int *count);
