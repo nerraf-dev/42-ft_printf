@@ -6,7 +6,7 @@
 #    By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/02 18:34:39 by sfarren           #+#    #+#              #
-#    Updated: 2024/07/08 08:37:54 by sfarren          ###   ########.fr        #
+#    Updated: 2024/07/17 09:26:32 by sfarren          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,22 @@ NAME = libftprintf.a
 # Compiler and Flags
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Darwin) # macOS
-    CC = gcc
+	CC = gcc
 else
-    CC = clang # Default to clang for other systems, including 42's
+	CC = clang # Default to clang for other systems, including 42's
 endif
 
 CFLAGS = -Wall -Wextra -Werror
 
 # Source and Object Files
 SRC = 	ft_printchr.c \
-		ft_printnbr_fd.c \
-		ft_putnbr_base.c \
 		ft_printf.c \
-		ft_printstr_fd.c \
+		ft_printptr.c \
+		ft_printstr.c \
+		ft_printnbr_base.c \
 		ft_utoa.c \
-		# utils.c
+
+
 
 OBJS = $(SRC:.c=.o)
 

@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr_fd.c                                   :+:      :+:    :+:   */
+/*   ft_printptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 16:13:05 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/02 14:37:51 by sfarren          ###   ########.fr       */
+/*   Created: 2024/07/08 15:25:53 by sfarren           #+#    #+#             */
+/*   Updated: 2024/07/17 12:23:24 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printstr_fd(char *s, int fd)
+void	ft_printptr(void *ptr, int *count)
 {
-	int	i;
+	unsigned long long	n;
 
-	i = 0;
-	while (s[i] != '\0')
+	n = (unsigned long long)ptr;
+	if (ptr == NULL)
 	{
-		if (write(fd, &s[i], 1) == -1)
-			return (-1);
-		i++;
+		ft_printstr(NULL_PTR_STR, count);
 	}
-	return (i);
+	else
+	{
+		ft_printstr("0x", count);
+		if (n >= 16)
+		{
+			ft_printnbr_base(n / 16, HEX_LOWER, count);
+			ft_printnbr_base(n % 16, HEX_LOWER, count);
+		}
+		else
+		{
+			ft_printchr(HEX_LOWER[n], count);
+		}
+	}
 }
