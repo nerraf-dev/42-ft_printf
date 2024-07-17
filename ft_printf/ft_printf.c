@@ -6,13 +6,13 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/17 10:15:30 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/17 13:30:02 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	format_handler(const char c, va_list args, int *count)
+static void	format_handler(const char c, va_list args, int *count)
 {
 	if (c == 'd' || c == 'i')
 		ft_printnbr_base(va_arg(args, int), DECIMAL, count);
