@@ -11,6 +11,7 @@ int	main(void)
 	printf("NULL: %p\n", NULL);
 	ft_printf("PNULL: %p\n", NULL);
 	ft_printf("NULL: %x\n", NULL);
+	printf("NULL: %x\n", (void *)NULL);
 	ft_printf(" %p \n", 1);
 ft_printf(" %p \n", 15);
 ft_printf(" %p %p \n", ULONG_MAX, -ULONG_MAX);

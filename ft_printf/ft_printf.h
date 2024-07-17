@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:20:31 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/17 12:21:49 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/17 12:52:32 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define HEX_UPPER "0123456789ABCDEF"
 
 # ifdef __APPLE__
+#  define NULL_PTR_STR "0x0"
+# elif defined(_WIN32)
 #  define NULL_PTR_STR "0x0"
 # else
 #  define NULL_PTR_STR "(nil)"
