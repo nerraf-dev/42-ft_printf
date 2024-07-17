@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 19:17:50 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/12 16:46:42 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 18:19:38 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,10 @@ int	ft_printf(const char *format, ...)
 			else if (format[i] == 'x' || format[i] == 'X')
 			{
 				if (format[i] == 'x')
-					unsigned_str = ft_putnbr_base(va_arg(args, unsigned int),
+					unsigned_str = ft_printnbr_base(va_arg(args, unsigned int),
 							"0123456789abcdef");
 				else
-					unsigned_str = ft_putnbr_base(va_arg(args, unsigned int),
+					unsigned_str = ft_printnbr_base(va_arg(args, unsigned int),
 							"0123456789ABCDEF");
 				if (!unsigned_str)
 					return (-1);
@@ -138,7 +138,7 @@ int	ft_printf(const char *format, ...)
 				if (ft_printstr("0x") == -1)
 					return (-1);
 				print_counter += 2;
-				unsigned_str = ft_putnbr_base((unsigned long)ptr,
+				unsigned_str = ft_printnbr_base((unsigned long)ptr,
 						"0123456789abcdef");
 				if (!unsigned_str)
 					return (-1);

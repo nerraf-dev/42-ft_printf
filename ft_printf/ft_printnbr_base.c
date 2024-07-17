@@ -1,33 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_printnbr_base.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:33:24 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/16 15:02:47 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/17 10:11:09 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// static int	ft_nbrlen(unsigned long n, int base_len)
-// {
-// 	int	len;
-
-// 	len = 1;
-// 	if (n == 0)
-// 		return (1);
-// 	while (n >= (unsigned long)base_len)
-// 	{
-// 		n /= base_len;
-// 		len++;
-// 	}
-// 	return (len);
-// }
-
-// Validates if the base string is valid for conversion.
 static int	is_valid_base(char *base)
 {
 	int	i;
@@ -52,22 +36,26 @@ static int	is_valid_base(char *base)
 	return (1);
 }
 
-// Converts a number to a string based on the specified base.
-int	ft_putnbr_base(unsigned int n, char *base)
+void	ft_printnbr_base(long long n, char *base, int *count)
 {
-	unsigned int		base_len;
-	int					counter;
-	char				c;
+	int	base_len;
 
 	if (!is_valid_base(base))
-		return (-1);
-
+		*count = -1;
 	base_len = ft_strlen(base);
-	counter = 0;
-	if (n >= base_len)
-		counter += ft_putnbr_base(n / base_len, base);
-	c = base[n % base_len];
-	if (ft_printchr(c) == -1)
-		return (-1);
-	return (counter + 1);
+	if (*count != -1)
+	{
+		if (n < 0)
+		{
+			ft_printchr('-', count);
+			n *= -1;
+		}
+		if (n >= base_len)
+		{
+			ft_printnbr_base(n / base_len, base, count);
+			ft_printnbr_base(n % base_len, base, count);
+		}
+		else
+			ft_printchr(base[n], count);
+	}
 }

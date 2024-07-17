@@ -6,7 +6,7 @@
 /*   By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 14:42:08 by sfarren           #+#    #+#             */
-/*   Updated: 2024/07/16 17:10:28 by sfarren          ###   ########.fr       */
+/*   Updated: 2024/07/16 18:22:02 by sfarren          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_printstr(char *s, int *count)
 		s = "(null)";
 	while (s[i])
 	{
-		ft_printchr(s[i], &count);
+		ft_printchr(s[i], count);
 		i++;
 	}
 }
