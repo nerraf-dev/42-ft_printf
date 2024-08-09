@@ -6,13 +6,20 @@
 #    By: sfarren <sfarren@student.42malaga.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 19:05:57 by sfarren           #+#    #+#              #
-#    Updated: 2024/08/09 12:44:14 by sfarren          ###   ########.fr        #
+#    Updated: 2024/08/09 12:57:07 by sfarren          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CC = clang
+# Compiler and Flags
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Darwin)
+	CC = gcc
+else
+	CC = clang
+endif
+
 CCFLAGS = -Wall -Wextra -Werror
 
 SRC = ft_atoi.c ft_isalpha.c ft_isprint.c ft_memcpy.c ft_strchr.c ft_strlen.c \
