@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//TODO: NOTES and clean up comments
 
 char	*ft_utoa(unsigned int n)
 {

@@ -29,7 +29,7 @@ SRC = 	ft_printchr.c \
 		ft_printptr.c \
 		ft_printstr.c \
 		ft_printnbr_base.c \
-		ft_utoa.c \
+		# ft_utoa.c \
 
 
 
